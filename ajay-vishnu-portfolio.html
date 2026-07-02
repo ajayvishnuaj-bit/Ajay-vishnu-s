@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajay Vishnu S — CG / VFX Layout Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0E0C;
+    --bg-raised: #12160F;
+    --ink: #EDEAE2;
+    --ink-dim: #9A9C93;
+    --amber: #D9862F;
+    --teal: #3F8F82;
+    --hair: rgba(237,234,226,0.14);
+    --grain-opacity: 0.05;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+
+  /* film grain overlay */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:var(--grain-opacity);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  .bars{
+    position:fixed; left:0; right:0; z-index:20;
+    background:#000; height:clamp(10px,3vw,28px);
+    pointer-events:none;
+  }
+  .bars.top{ top:0; }
+  .bars.bottom{ bottom:0; }
+
+  .frame{
+    position:relative;
+    padding: clamp(10px,3vw,28px) 0;
+  }
+
+  section{
+    max-width:1100px;
+    margin:0 auto;
+    padding: 90px 28px;
+    position:relative;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    color:var(--amber);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:20px; height:1px; background:var(--amber);
+  }
+
+  /* ---------- HERO ---------- */
+  #hero{
+    min-height:92vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    padding-top:0;
+    padding-bottom:0;
+  }
+
+  .reticle{
+    position:absolute;
+    width:22px; height:22px;
+    border:1px solid var(--ink-dim);
+    opacity:0.55;
+  }
+  .reticle.tl{ top:40px; left:28px; border-right:none; border-bottom:none; }
+  .reticle.tr{ top:40px; right:28px; border-left:none; border-bottom:none; }
+  .reticle.bl{ bottom:40px; left:28px; border-right:none; border-top:none; }
+  .reticle.br{ bottom:40px; right:28px; border-left:none; border-top:none; }
+
+  .rec{
+    position:absolute; top:44px; right:60px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:0.12em;
+    color:var(--ink-dim);
+    display:flex; align-items:center; gap:8px;
+  }
+  .rec .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:#c0392b;
+    box-shadow:0 0 8px #c0392b;
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  .role-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--teal);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:22px;
+  }
+
+  h1.title{
+    position:relative;
+    font-family:'Bebas Neue', sans-serif;
+    font-weight:400;
+    font-size:clamp(58px, 12vw, 148px);
+    line-height:0.86;
+    letter-spacing:0.01em;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(11,14,12,0.85) 0 2px, transparent 2px 22px),
+      linear-gradient(120deg, #D9862F 0%, #3F8F82 30%, #EDEAE2 50%, #3F8F82 70%, #D9862F 100%);
+    background-size: 240px 240px, 320% 320%;
+    background-position: 0 0, 0% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--ink);
+    -webkit-text-fill-color: transparent;
+    animation: title-scan 16s linear infinite, title-flicker 5s ease-in-out infinite;
+  }
+  @supports not ((-webkit-background-clip:text) or (background-clip:text)){
+    h1.title{ background:none; -webkit-text-fill-color:var(--ink); color:var(--ink); animation:none; }
+  }
+  @keyframes title-scan{
+    0%{ background-position: 0 0, 0% 30%; }
+    100%{ background-position: 0 480px, 200% 70%; }
+  }
+  @keyframes title-flicker{
+    0%,100%{ filter:brightness(1); }
+    46%{ filter:brightness(1); }
+    47%{ filter:brightness(1.35); }
+    48%{ filter:brightness(0.88); }
+    50%{ filter:brightness(1); }
+    81%{ filter:brightness(1); }
+    82%{ filter:brightness(0.75); }
+    83%{ filter:brightness(1.1); }
+  }
+  .title .last{ -webkit-text-fill-color:transparent; }
+
+  .slate{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--ink-dim);
+    margin-top:20px;
+    padding:6px 12px;
+    border:1px solid var(--hair);
+  }
+  .slate .dot-mini{
+    width:6px; height:6px; border-radius:50%;
+    background:#c0392b; box-shadow:0 0 6px #c0392b;
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+
+  .subhead{
+    margin-top:26px;
+    max-width:560px;
+    font-size:17px;
+    line-height:1.65;
+    color:var(--ink-dim);
+    font-weight:300;
+  }
+
+  .hero-meta{
+    display:flex; gap:36px; flex-wrap:wrap;
+    margin-top:52px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-dim);
+  }
+  .hero-meta div span{ display:block; color:var(--ink); font-size:13px; margin-top:4px;}
+
+  .scroll-cue{
+    position:absolute; bottom:56px; left:50%; transform:translateX(-50%);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px; letter-spacing:0.2em; color:var(--ink-dim);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .scroll-cue .line{ width:1px; height:34px; background:linear-gradient(var(--ink-dim), transparent); animation:drop 2s ease-in-out infinite; }
+  @keyframes drop{ 0%{opacity:0.2;} 50%{opacity:1;} 100%{opacity:0.2;} }
+
+  /* ---------- SECTION HEADERS ---------- */
+  h2.sec-title{
+    font-family:'Bebas Neue', sans-serif;
+    font-weight:400;
+    font-size:clamp(34px,5vw,54px);
+    letter-spacing:0.01em;
+    margin-bottom:34px;
+    color:var(--ink);
+  }
+
+  .rule{
+    height:1px; background:var(--hair); border:none; margin:0;
+  }
+
+  /* ---------- ABOUT ---------- */
+  #about p{
+    font-size:18px;
+    line-height:1.85;
+    color:var(--ink-dim);
+    max-width:760px;
+    font-weight:300;
+  }
+  #about strong{ color:var(--ink); font-weight:500; }
+
+  /* ---------- REEL ---------- */
+  .reel-frame{
+    position:relative;
+    border:1px solid var(--hair);
+    background:var(--bg-raised);
+    padding:8px;
+  }
+  .reel-frame .video-wrap{
+    position:relative;
+    padding-top:56.25%;
+    background:#000;
+  }
+  .reel-frame iframe{
+    position:absolute; inset:0; width:100%; height:100%; border:0;
+  }
+  .reel-cap{
+    display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--ink-dim);
+    padding:12px 6px 4px;
+    letter-spacing:0.06em;
+  }
+  .reel-links{
+    margin-top:26px; display:flex; gap:28px; flex-wrap:wrap;
+  }
+  .link-pill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.08em;
+    color:var(--ink);
+    text-decoration:none;
+    border:1px solid var(--hair);
+    padding:10px 18px;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:border-color .25s ease, color .25s ease;
+  }
+  .link-pill:hover, .link-pill:focus-visible{
+    border-color:var(--amber); color:var(--amber);
+    outline:none;
+  }
+  .link-pill::after{ content:"↗"; font-size:13px; }
+
+  /* ---------- CREDITS MARQUEE ---------- */
+  #credits{ padding-top:70px; padding-bottom:40px; }
+  .credit-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
+    border-top:1px solid var(--hair);
+    border-left:1px solid var(--hair);
+  }
+  .credit-cell{
+    border-right:1px solid var(--hair);
+    border-bottom:1px solid var(--hair);
+    padding:26px 22px;
+    font-family:'Bebas Neue', sans-serif;
+    font-size:22px;
+    letter-spacing:0.01em;
+    color:var(--ink);
+    display:flex; align-items:center; min-height:88px;
+    transition:background .3s ease, color .3s ease;
+  }
+  .credit-cell:hover{ background:var(--bg-raised); color:var(--amber); }
+  .credit-note{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--ink-dim);
+    margin-top:22px;
+  }
+
+  /* ---------- SHOT LIST / EXPERIENCE ---------- */
+  .shot{
+    display:grid;
+    grid-template-columns:110px 1fr;
+    gap:28px;
+    padding:34px 0;
+    border-bottom:1px solid var(--hair);
+  }
+  .shot:first-of-type{ border-top:1px solid var(--hair); }
+  .tc{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--teal);
+    letter-spacing:0.05em;
+    padding-top:4px;
+  }
+  .shot-role{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:26px; letter-spacing:0.01em; color:var(--ink);
+  }
+  .shot-company{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--amber);
+    margin-top:4px; letter-spacing:0.05em;
+  }
+  .shot-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--ink-dim);
+    margin-top:6px; letter-spacing:0.04em;
+  }
+  .shot ul{
+    margin-top:16px; padding-left:18px; color:var(--ink-dim);
+    font-size:15px; line-height:1.75; font-weight:300;
+  }
+  .shot ul li{ margin-bottom:6px; }
+  .shot ul li::marker{ color:var(--amber); }
+
+  /* ---------- SKILLS ---------- */
+  .skill-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--hair);
+    border:1px solid var(--hair);
+  }
+  .skill-block{ background:var(--bg); padding:26px 24px; }
+  .skill-block h3{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:14px;
+  }
+  .skill-block div.item{
+    font-size:15px; color:var(--ink-dim); padding:4px 0;
+    display:flex; justify-content:space-between; gap:10px;
+  }
+  .skill-block div.item span.lvl{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px; color:var(--ink-dim); opacity:0.7;
+  }
+
+  /* ---------- CONTACT ---------- */
+  #contact{ padding-bottom:130px; }
+  .contact-inner{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:40px;
+    align-items:flex-end;
+  }
+  .contact-cta{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(40px,7vw,84px);
+    line-height:0.95;
+    max-width:640px;
+  }
+  .contact-cta a{ color:var(--amber); text-decoration:none; border-bottom:2px solid var(--amber); }
+  .contact-details{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--ink-dim); line-height:2.1;
+    text-align:right;
+  }
+  .contact-details a{ color:var(--ink); text-decoration:none; }
+  .contact-details a:hover, .contact-details a:focus-visible{ color:var(--amber); outline:none; }
+
+  footer{
+    border-top:1px solid var(--hair);
+    padding:26px 28px;
+    max-width:1100px; margin:0 auto;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--ink-dim); letter-spacing:0.05em;
+  }
+
+  @media (max-width:640px){
+    .shot{ grid-template-columns:1fr; gap:8px; }
+    .contact-inner{ flex-direction:column; align-items:flex-start; }
+    .contact-details{ text-align:left; }
+    .rec{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .rec .dot, .scroll-cue .line, .slate .dot-mini{ animation:none; }
+    h1.title{ animation:none; background-position: 0 0, 40% 50%; }
+    html{ scroll-behavior:auto; }
+  }
+
+  ::selection{ background:var(--amber); color:#0B0E0C; }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<div class="bars top"></div>
+<div class="bars bottom"></div>
+
+<div class="frame">
+
+  <section id="hero">
+    <div class="reticle tl"></div>
+    <div class="reticle tr"></div>
+    <div class="reticle bl"></div>
+    <div class="reticle br"></div>
+    <div class="rec"><span class="dot"></span> REC · SHOT 001</div>
+
+    <div class="role-tag">CG / VFX Layout Artist</div>
+    <h1 class="title">AJAY<br>VISHNU<span class="last"> S</span></h1>
+    <div class="slate"><span class="dot-mini"></span> Self-intro reel — placeholder texture, swap in your clip</div>
+    <p class="subhead">Building camera, story, and continuity for feature film and episodic VFX — from previs and storyboards through to final delivery, on shows shipped through DNEG for global theatrical release.</p>
+
+    <div class="hero-meta">
+      <div>Based in<span>Palakkad, Kerala, India</span></div>
+      <div>Currently at<span>DNEG, Trivandrum</span></div>
+      <div>Available for<span>Feature &amp; episodic layout work</span></div>
+    </div>
+
+    <div class="scroll-cue"><span>SCROLL</span><span class="line"></span></div>
+  </section>
+
+  <section id="about">
+    <div class="eyebrow">00 — About</div>
+    <h2 class="sec-title">The frame before the frame.</h2>
+    <p>I'm a <strong>Senior CG/VFX Layout Artist</strong> with seven years spent turning storyboards and previs into the cinematic camera work that everything downstream — animation, FX, lighting, comp — builds on. My job starts before a shot looks finished: reading a director's intent, finding the lens, the scale, the blocking that tells the story clearly, and holding that continuity across sequences with hundreds of shots and tight deadlines.</p>
+    <br>
+    <p>At <strong>DNEG</strong> I've carried plate-based and full-CG layout across action-heavy theatrical releases, working shot handoffs with matchmove, animation, FX, lighting and compositing teams, and absorbing feedback cycles without losing delivery quality. Recognized as <strong>Best Artist of the Month</strong> for consistency and reliability under pressure.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section id="reel">
+    <div class="eyebrow">01 — Reel</div>
+    <h2 class="sec-title">Demo Reel</h2>
+    <div class="reel-frame">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/QOqMrjbLuhY" title="Ajay Vishnu S — Demo Reel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="reel-cap"><span>AJAY_VISHNU_S_REEL_2026.MOV</span><span>16:9 · 1080p</span></div>
+    </div>
+    <div class="reel-links">
+      <a class="link-pill" href="https://ajayvishnu.artstation.com/resume" target="_blank" rel="noopener">Full Breakdown — ArtStation</a>
+      <a class="link-pill" href="https://www.linkedin.com/in/ajayvishnuaj/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="credits">
+    <div class="eyebrow">02 — Credits</div>
+    <h2 class="sec-title">Selected Work</h2>
+    <div class="credit-grid">
+      <div class="credit-cell">Fighter</div>
+      <div class="credit-cell">Sky Force</div>
+      <div class="credit-cell">Bade Miyan Chote Miyan</div>
+      <div class="credit-cell">Kalki</div>
+      <div class="credit-cell">Ramayana</div>
+      <div class="credit-cell">Toxic</div>
+      <div class="credit-cell">Chhaava</div>
+      <div class="credit-cell">Masters of the Universe</div>
+      <div class="credit-cell">Saving Bikini Bottom</div>
+      <div class="credit-cell">Secret Agent Jack Stalwart</div>
+      <div class="credit-cell">Bureau 749</div>
+    </div>
+    <div class="credit-note">Layout work on feature and episodic VFX productions, delivered through DNEG.</div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="experience">
+    <div class="eyebrow">03 — Experience</div>
+    <h2 class="sec-title">Shot List</h2>
+
+    <div class="shot">
+      <div class="tc">2022 →<br>PRESENT</div>
+      <div>
+        <div class="shot-role">CG / VFX Layout Artist</div>
+        <div class="shot-company">DNEG</div>
+        <div class="shot-meta">Trivandrum, India</div>
+        <ul>
+          <li>Delivered feature-film layout shots across action-heavy, VFX-intensive sequences for major theatrical releases</li>
+          <li>Interpreted storyboards, previs, and director notes into cinematic camera layouts aligned with narrative intent</li>
+          <li>Executed plate-based and full-CG layouts, holding scale, lens realism, and spatial continuity</li>
+          <li>Maintained shot continuity across high shot-count sequences under aggressive deadlines</li>
+          <li>Handled shot handoff with matchmove, animation, FX, lighting, and compositing teams</li>
+          <li>Awarded Best Artist of the Month for consistency, quality, and reliability</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="tc">2021 →<br>2022</div>
+      <div>
+        <div class="shot-role">3D Animator</div>
+        <div class="shot-company">Xentrix Studios</div>
+        <div class="shot-meta">Bengaluru, India</div>
+        <ul>
+          <li>Episodic animation for Nickelodeon's Big Nate series</li>
+          <li>Character animation with strong timing, spacing, and performance clarity</li>
+          <li>Supported layout and camera staging for episodic sequences</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="tc">2019 →<br>2021</div>
+      <div>
+        <div class="shot-role">3D Animator</div>
+        <div class="shot-company">Quadcubes Digital</div>
+        <div class="shot-meta">Calicut, India</div>
+        <ul>
+          <li>Episodic content, advertisements, and digital media projects</li>
+          <li>Cross-department work spanning layout, modeling, lighting, and rendering</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="tc">2018 →<br>2019</div>
+      <div>
+        <div class="shot-role">3D Animator</div>
+        <div class="shot-company">Vinam Solutions</div>
+        <div class="shot-meta">Calicut, India</div>
+        <ul>
+          <li>3D animation and content creation for advertisements and online platforms</li>
+          <li>Built foundation in production workflows and deadlines</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="skills">
+    <div class="eyebrow">04 — Toolkit</div>
+    <h2 class="sec-title">Camera &amp; Toolkit</h2>
+    <div class="skill-grid">
+      <div class="skill-block">
+        <h3>3D / Layout</h3>
+        <div class="item">Autodesk Maya <span class="lvl">ADVANCED</span></div>
+        <div class="item">Houdini <span class="lvl">WORKING</span></div>
+        <div class="item">3D Equalizer <span class="lvl">WORKING</span></div>
+        <div class="item">Unreal Engine <span class="lvl">BASIC</span></div>
+        <div class="item">Blender <span class="lvl">BASIC</span></div>
+        <div class="item">3ds Max <span class="lvl">BASIC</span></div>
+      </div>
+      <div class="skill-block">
+        <h3>Compositing / Tracking</h3>
+        <div class="item">Nuke</div>
+        <div class="item">After Effects</div>
+        <div class="item">Camera &amp; Body Tracking</div>
+      </div>
+      <div class="skill-block">
+        <h3>Pipeline</h3>
+        <div class="item">Shotgun / ShotGrid</div>
+        <div class="item">Basic Scripting</div>
+      </div>
+      <div class="skill-block">
+        <h3>Other</h3>
+        <div class="item">Photoshop</div>
+        <div class="item">Illustrator</div>
+        <div class="item">Premiere Pro</div>
+      </div>
+      <div class="skill-block">
+        <h3>Languages</h3>
+        <div class="item">English</div>
+        <div class="item">Hindi</div>
+        <div class="item">Malayalam</div>
+        <div class="item">Tamil</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="contact">
+    <div class="eyebrow">05 — Contact</div>
+    <div class="contact-inner">
+      <h2 class="contact-cta">Let's get<br>this shot<br><a href="mailto:ajayvishnu.aj@gmail.com">on the board.</a></h2>
+      <div class="contact-details">
+        Palakkad, Kerala, India<br>
+        +91 9544067287<br>
+        <a href="mailto:ajayvishnu.aj@gmail.com">ajayvishnu.aj@gmail.com</a><br>
+        <a href="https://www.linkedin.com/in/ajayvishnuaj/" target="_blank" rel="noopener">LinkedIn ↗</a><br>
+        <a href="https://ajayvishnu.artstation.com/resume" target="_blank" rel="noopener">ArtStation ↗</a><br>
+        <a href="https://youtu.be/QOqMrjbLuhY" target="_blank" rel="noopener">Demo Reel ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Ajay Vishnu S — CG / VFX Layout Artist</span>
+    <span>Shot on location, Kerala, India</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
